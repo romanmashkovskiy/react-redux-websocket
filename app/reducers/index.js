@@ -1,11 +1,9 @@
 import {combineReducers} from 'redux';
-import listRepository from './list-reducer';
-import  repositoryActive from './repository-active';
+import locationReducer from './location-reducer';
 
 
 const rootReducer = combineReducers({
-    listRepository: listRepository,
-    repositoryActive: repositoryActive
+    location: locationReducer
 });
 
 export default rootReducer;
