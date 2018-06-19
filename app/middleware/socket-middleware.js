@@ -1,19 +1,24 @@
-import {connectedSuccess} from '../actions/index'
+import {connectionSuccess, connectionStart, connectionStop, disconnectServer} from '../actions/index'
 
 const socketMiddleware = (function(){
     var socket = null;
 
-    const onOpen = (ws,store,token) => evt => {
-        //Send a handshake, or authenticate with remote end
+    const onOpen = (ws,store) => evt => {
+        console.log('onopen__middleware');
+        store.dispatch(connectionSuccess());
+    };
 
-        //Tell the store we're connected
-        store.dispatch(connectedSuccess());
-    }
-
-    // const onClose = (ws,store) => evt => {
-    //     //Tell the store we've disconnected
-    //     store.dispatch(actions.disconnected());
+    // const onError = (ws,store) => evt => {
+    //     console.log('error');
+    //     //Send a handshake, or authenticate with remote end
+    //
+    //     //Tell the store we're connected
     // }
+
+    const onClose = (ws,store) => evt => {
+        console.log('onclose__middleware');
+        store.dispatch(connectionStop());
+    };
     //
     // const onMessage = (ws,store) => evt => {
     //     //Parse the JSON message received on the websocket
@@ -33,33 +38,31 @@ const socketMiddleware = (function(){
         switch(action.type) {
 
             //The user wants us to connect
-            case 'CONNECT':
-                console.log(action.payload)
-                //Start a new connection to the server
+            case 'CONNECT_SERVER':
+                console.log('CONNECT_SERVER_middleware');
                 if(socket != null) {
                     socket.close();
                 }
-
-                //Attempt to connect (we could send a 'failed' action on error)
+                store.dispatch(connectionStart());
                 socket = new WebSocket(action.payload);
                 // socket.onmessage = onMessage(socket,store);
-                // socket.onclose = onClose(socket,store);
-                socket.onopen = onOpen(socket,store,action.token);
+                socket.onclose = onClose(socket,store);
+                socket.onopen = onOpen(socket,store);
+                // socket.onerror = function(error) {
+                //     alert("Ошибка " + error.message);
+                // };
 
                 break;
 
-            //The user wants us to disconnect
-            // case 'DISCONNECT':
-            //     if(socket != null) {
-            //         socket.close();
-            //     }
-            //     socket = null;
-            //
-            //     //Set our state to disconnected
-            //     store.dispatch(actions.disconnected());
-            //     break;
-            //
-            // //Send the 'SEND_MESSAGE' action down the websocket to the server
+            case 'DISCONNECT_SERVER':
+                if(socket != null) {
+                    socket.close();
+                }
+                socket = null;
+                store.dispatch(connectionStop());
+                break;
+
+            //Send the 'SEND_MESSAGE' action down the websocket to the server
             // case 'SEND_CHAT_MESSAGE':
             //     socket.send(JSON.stringify(action));
             //     break;

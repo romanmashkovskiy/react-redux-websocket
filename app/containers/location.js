@@ -8,13 +8,14 @@ class Location extends Component {
 
     render () {
         return (
-            <form className="ui form">
+            <div>
                 <div className="field">
                     <label>Location</label>
-                    <input type="text" ref="location" name="location" defaultValue={this.props.location} placeholder="Location"/>
+                    <input type="text" ref="location" placeholder="Location"/>
                 </div>
+                <div>wss://echo.websocket.org</div>
                 <button className="ui button" onClick={() => this.props.connectServer(this.refs.location.value)}>Connect</button>
-            </form>
+            </div>
         );
     }
 }

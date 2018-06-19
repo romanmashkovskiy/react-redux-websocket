@@ -1,9 +1,9 @@
 import {combineReducers} from 'redux';
-import locationReducer from './location-reducer';
+import statusConnectionReducer from './status-connection-reducer';
 
 
 const rootReducer = combineReducers({
-    location: locationReducer
+    status: statusConnectionReducer
 });
 
 export default rootReducer;
