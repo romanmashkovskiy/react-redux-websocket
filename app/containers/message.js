@@ -25,18 +25,19 @@ class Message extends Component {
                         <label>Message</label>
                         <input type="text" ref="message" placeholder="Message"/>
                     </div>
-                    <button className="ui button" onClick={() => {
-                        this.sendMessage (this.refs.message.value);
-                    }}
+                    <button className="ui button"
+                            onClick={() => {
+                                this.sendMessage (this.refs.message.value);
+                            }}
                     >Send</button>
                 </div>
             );
          } else {
             return (
                 <div className="ui form">
-                    <div className="field">
+                    <div className="disabled field">
                         <label>Message</label>
-                        <input type="text" ref="message" placeholder="Message"/>
+                        <input type="text" placeholder="Message"/>
                     </div>
                     <button className="ui disabled button">Send</button>
                 </div>

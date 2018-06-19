@@ -7,7 +7,7 @@ import { connectServer, disconnectServer } from "../actions";
 class Location extends Component {
 
     render () {
-        if (this.props.status == "disconnected") {
+        if (this.props.status === "disconnected") {
             return (
                 <div className="ui form">
                     <div className="field">
@@ -19,7 +19,6 @@ class Location extends Component {
 
             );
         } else {
-
             return (
                 <div className="ui form">
                     <div className="field">
@@ -30,7 +29,6 @@ class Location extends Component {
                 </div>
             );
         }
-
     }
 }
 
