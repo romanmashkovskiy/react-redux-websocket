@@ -14,6 +14,7 @@ const App = () => (
         <div className="ui grid">
             <div className="column six wide">
                 <StatusConnection />
+                <br/>
                 <Location />
                 <br/>
                 <Message />

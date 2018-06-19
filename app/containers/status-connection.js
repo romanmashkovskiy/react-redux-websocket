@@ -4,9 +4,13 @@ import { connect } from 'react-redux';
 class  StatusConnection extends Component {
     render() {
         return (
-            <div>
-                <h2>Status</h2>
-                <div>{this.props.status}</div>
+
+
+            <div className="ui form">
+                <div className="field">
+                    <label>Connection status</label>
+                    <input type="text" value={this.props.status}  readOnly={this.props.status}/>
+                </div>
             </div>
         );
     }

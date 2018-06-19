@@ -10,7 +10,7 @@ class  SentList extends Component {
                     <div className="ui celled ordered list">
                         {
                             this.props.sentMessages.map(function(message, index) {
-                                return <div class="item" key={index}>{message}</div>
+                                return <div className="item" key={index}>{message}</div>
                             })
 
                         }

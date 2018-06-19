@@ -9,21 +9,22 @@ class Location extends Component {
     render () {
         if (this.props.status == "disconnected") {
             return (
-                <div>
+                <div className="ui form">
                     <div className="field">
                         <label>Location</label>
                         <input type="text" ref="location" defaultValue={this.props.location} placeholder="Location"/>
                     </div>
                     <button className="ui button" onClick={() => this.props.connectServer(this.refs.location.value)}>Connect</button>
                 </div>
+
             );
         } else {
 
             return (
-                <div>
+                <div className="ui form">
                     <div className="field">
                         <label>Location</label>
-                        <input type="text" ref="location" placeholder="Location"/>
+                        <input type="text" ref="location" defaultValue={this.props.location} placeholder="Location"/>
                     </div>
                     <button className="ui button" onClick={() => this.props.disconnectServer()}>Disconnect</button>
                 </div>

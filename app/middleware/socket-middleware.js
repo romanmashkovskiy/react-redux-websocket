@@ -1,11 +1,15 @@
 import { connectionSuccess, connectionStart, connectionStop, addToSentMessage, addToReceivedMessage, currentLocation } from '../actions/index'
-import * as actions from '../actions/action-types'
+import * as actions from '../actions/action-types';
 
 const socketMiddleware = (function(){
     let socket = null;
 
     const onOpen = (ws,store) => evt => {
         store.dispatch(connectionSuccess());
+    };
+
+    const onError = (ws,store) => evt => {
+        alert("Error connection");
     };
 
     const onClose = (ws,store) => evt => {
@@ -29,10 +33,7 @@ const socketMiddleware = (function(){
                 socket.onmessage = onMessage(socket,store);
                 socket.onclose = onClose(socket,store);
                 socket.onopen = onOpen(socket,store);
-                // socket.onerror = function(error) {
-                //     alert("Ошибка " + error.message);
-                // };
-
+                socket.onerror = onError(socket,store);
                 break;
 
             case actions.DISCONNECT_SERVER:
