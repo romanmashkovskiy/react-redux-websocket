@@ -1,12 +1,11 @@
-export default function statusConnectionReducer (state = null, action) {
+import * as actions from '../actions/action-types'
+
+export default function statusConnectionReducer (state = "disconnected", action) {
     switch(action.type) {
-        case "CONNECTED":
-        case "CONNECTING":
-        case "DISCONNECTED":
-            {
-            console.log('action.payload');
+        case actions.CONNECTING:
+        case actions.CONNECTED:
+        case actions.DISCONNECTED:
             return action.payload;
-            }
         default:
             return state;
     }

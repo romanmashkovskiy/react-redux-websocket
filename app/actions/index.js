@@ -1,44 +1,67 @@
-
-
+import * as actions from './action-types'
 
 // for reducer
 export function connectionStart() {
-    console.log('CONNECTING_action');
     return {
-        type: "CONNECTING",
-        payload: 22
+        type: actions.CONNECTING,
+        payload: "connecting"
     }
 }
 
 export function connectionSuccess() {
-    console.log('CONNECTED_action');
     return {
-        type: "CONNECTED",
-        payload: 11
+        type: actions.CONNECTED,
+        payload: "connected"
     }
 }
 
 export function connectionStop() {
-    console.log('DISCONNECTING_action');
     return {
-        type: "DISCONNECTED",
-        payload: 33
+        type: actions.DISCONNECTED,
+        payload: "disconnected"
     }
 }
 
-//for middleware
-export const connectServer = (url) => {
-    console.log('CONNECT_SERVER_action');
+export const addToSentMessage = (message) => {
     return {
-        type: "CONNECT_SERVER",
+        type: actions.ADD_TO_SENT_MESSAGE,
+        payload: message
+    }
+};
+
+export const addToReceivedMessage = (message) => {
+    return {
+        type: actions.ADD_TO_RECEIVED_MESSAGE,
+        payload: message
+    }
+};
+
+export const currentLocation = (url) => {
+    return {
+        type: actions.ADD_CURRENT_LOCATION,
         payload: url
     }
 };
 
-export const disconnectServer = (url) => {
-    console.log('DISCONNECT_SERVER_action');
+
+
+//for middleware
+export const connectServer = (url) => {
     return {
-        type: "DISCONNECT_SERVER",
+        type: actions.CONNECT_SERVER,
         payload: url
+    }
+};
+
+export const disconnectServer = () => {
+    return {
+        type: actions.DISCONNECT_SERVER
+    }
+};
+
+export const sendMessage = (message) => {
+    return {
+        type: actions.SEND_MESSAGE,
+        payload: message
     }
 };

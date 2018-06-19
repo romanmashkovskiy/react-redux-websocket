@@ -1,0 +1,21 @@
+import React, {Component} from 'react';
+import { connect } from 'react-redux';
+
+class  StatusConnection extends Component {
+    render() {
+        return (
+            <div>
+                <h2>Status</h2>
+                <div>{this.props.status}</div>
+            </div>
+        );
+    }
+}
+
+function mapStateToProps (state) {
+    return {
+        status: state.status
+    };
+}
+
+export default connect(mapStateToProps)(StatusConnection);
